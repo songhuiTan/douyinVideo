@@ -1,0 +1,40 @@
+{
+  "permissions": {
+    "allow": [],
+    "deny": []
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cat docs/progress/current-sprint.md 2>/dev/null | head -20 || echo 'No active sprint'",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo \"[$(date -u +%Y-%m-%dT%H:%M:%SZ)] tool=$TOOL_NAME\" >> docs/progress/session-bridge.md 2>/dev/null || true",
+            "timeout": 3
+          }
+        ]
+      },
+      {
+        "matcher": "Agent",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo \"[$(date -u +%Y-%m-%dT%H:%M:%SZ)] parallel_agent_invoked\" >> docs/progress/parallel-tasks.md 2>/dev/null || true",
+            "timeout": 3
+          }
+        ]
+      }
+    ]
+  }
+}

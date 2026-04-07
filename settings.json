@@ -1,0 +1,24 @@
+{
+  "permission": {
+    "mode": "default",
+    "allowed_tools": [],
+    "denied_tools": [],
+    "path_rules": [
+      { "pattern": ".env", "allow": false },
+      { "pattern": ".env.*", "allow": false },
+      { "pattern": "credentials.json", "allow": false },
+      { "pattern": "*.pem", "allow": false },
+      { "pattern": "*.key", "allow": false },
+      { "pattern": "node_modules/**", "allow": false }
+    ],
+    "denied_commands": [
+      "rm -rf /",
+      "rm -rf ~",
+      "DROP TABLE *",
+      "DROP DATABASE *",
+      "DELETE FROM * WHERE 1=1",
+      "git push --force origin main",
+      "git push --force origin master"
+    ]
+  }
+}
